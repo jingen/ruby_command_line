@@ -21,10 +21,10 @@ RECIPES =
 ]
 
 class Recipes < Thor
-    desc "add --title --cooking_time --description", "Adds a new recipe."
-    option :title, required: true
-    option :cooking_time, required: true
-    option :description, required: true
+    desc "add", "Adds a new recipe."
+    option :title, required: true, aliases: "-t"
+    option :cooking_time, required: true, aliases: "-c"
+    option :description, required: true, aliases: "-d"
     def add # app.rb recipes add --title="" --cooking_time="" --description=""
         recipe ={
             title: options[:title],
@@ -38,27 +38,11 @@ class Recipes < Thor
             puts recipe[:title]
         end
     end
-end
 
-class App < Thor
-
-    desc "recipes", "Manage recipes"
-    subcommand "recipes", Recipes # app.rb recipes add
-    # desc "usage" "usage explanation"
-    desc "hello raw", "Prints 'Hello World' to the screen."
-    def hello
-        puts "Hello World"
-    end
-
-    desc "hello1 WORD", "Prints 'Hello WORD' to the screen."
-    def hello1 word
-        puts "Hello #{word}"
-    end
-
-    desc "list_recipes [KEYWORD] [OPTIONS]", "List all recipes. If a keyword is given, it filters the list based off it."
+    desc "list [KEYWORD] [OPTIONS]", "List all recipes. If a keyword is given, it filters the list based off it."
     option :format
     option :show_time, type: :boolean, default: true #--show-time --no-show-time
-    def list_recipes keyword=nil
+    def list keyword=nil
         recipes = RECIPES
         recipes_to_be_listed =
             if keyword.nil? then recipes
@@ -85,7 +69,13 @@ class App < Thor
     def print_oneline recipe
         time = if options[:show_time] then "(#{recipe[:cooking_time]})" else "" end
             puts %Q(#{recipe[:title]} #{time})
-        end
     end
+end
 
-    App.start ARGV
+class App < Thor
+
+    desc "recipes", "Manage recipes"
+    subcommand "recipes", Recipes # app.rb recipes add
+end
+
+App.start ARGV
