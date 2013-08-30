@@ -4,8 +4,9 @@ require "thor"
 
 class Commands < Thor
 	desc "commit message", "c c message"
+        option :all, aliases: "-a"
 	def c message="fix"
-		executed_cmd = get_commit(message)
+		executed_cmd = get_commit(message) 
 		puts %x(#{executed_cmd})
 	end
 
@@ -30,8 +31,9 @@ class Commands < Thor
 
 	def get_commit message 
 		cmd = Array.new
-		cmd << "git add ."
-		cmd << "git commit -am " + "'" + message + " :" + Time.now.to_s + "'"
+		cmd << "git add ." unless options[:all].nil?
+		time = Time.now
+		cmd << "git commit -am '#{message} : #{time.to_s} #{time.strftime('%A')}'"
 		cmd << "git pull"
 		cmd << "git push"
 		return cmd.join(" && ")
