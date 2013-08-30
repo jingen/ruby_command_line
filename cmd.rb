@@ -6,9 +6,7 @@ class Commands < Thor
 	desc "commit x", "git commit -am message"
 	def c message=""
 		executed_cmd = get_commit(message)
-		# puts executed_cmd
-		result = %x(#{executed_cmd})
-		puts result
+		%x(#{executed_cmd})
 	end
 
 	private
