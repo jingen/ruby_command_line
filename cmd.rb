@@ -8,6 +8,7 @@ class Commands < Thor
 		executed_cmd = get_commit(message)
 		# puts executed_cmd
 		%x(#{executed_cmd})
+		
 		# puts result
 	end
 
