@@ -7,7 +7,7 @@ class Commands < Thor
 	def c message=""
 		executed_cmd = get_commit(message)
 		# puts executed_cmd
-		result = %x(#{executed_cmd})
+		%x(#{executed_cmd})
 		# puts result
 	end
 
