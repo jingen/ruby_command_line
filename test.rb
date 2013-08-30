@@ -1,13 +1,12 @@
-# result = %x(ls *)
-# name = "jingen lin"
-# result = %Q(#{name}, and backslashes)
-# puts result
-# result = "#{name}, and backslashes"
-# puts result
-# result = %q(#{name}, and backslashes)
-# puts result
-# result = "#{name}, and backslashes\n"
-# puts result
-string = "lin jing en"
-x = "li"
-puts x if string.include? x
+#!/usr/bin/env ruby
+
+require "thor"
+
+class Commands < Thor
+    desc "commit x", "git commit -am message"
+    def commit message=""
+        puts "hello"
+    end
+end
+
+Commands.start ARGV

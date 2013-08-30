@@ -7,7 +7,7 @@
         + ruby app.rb list_recipes cheese --format=oneline --show-time
 
 #definition
-    - class App < Thor
+    - class Apps < Thor (class name is plural form)
     - desc "usage", "explanation"
     - option :option_name, type: :boolean, default: true
     - option :name, required: true
