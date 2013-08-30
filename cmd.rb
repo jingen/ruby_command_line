@@ -4,7 +4,7 @@ require "thor"
 
 class Commands < Thor
 	desc "commit message", "c c message"
-	def c message=""
+	def c message="fix"
 		executed_cmd = get_commit(message)
 		puts %x(#{executed_cmd})
 	end
@@ -28,7 +28,7 @@ class Commands < Thor
 	
 	private
 
-	def get_commit message = "fix"
+	def get_commit message 
 		cmd = Array.new
 		cmd << "git add ."
 		cmd << "git commit -am " + "'" + message + " :" + Time.now.to_s + "'"
