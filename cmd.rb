@@ -11,7 +11,7 @@ class Commands < Thor
 
 	private
 
-	def get_commit message = ""
+	def get_commit message = "fix"
 		cmd = Array.new
 		cmd << "git add ."
 		cmd << "git commit -am " + "'" + message + " :" + Time.now.to_s + "'"
